@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Peyda';
+  src: url('../assets/font/PeydaWeb-Regular.woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Peyda';
+  src: url('../assets/font/PeydaWeb-Medium.woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Peyda';
+  src: url('../assets/font/PeydaWeb-Bold.woff2');
+  font-weight: 700;
+  font-style: bold;
+}
+
+body {
+  font-family: 'Peyda', sans-serif;
+  font-weight: 400;
+  height: 100vh;
+  background-color: #d1d5db;
+  padding: 1rem 0 1rem 0;
+}
+
+#__next {
+  height: 100%;
+}
