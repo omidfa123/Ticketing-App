@@ -1,27 +1,47 @@
 import {
   Box,
   Button,
-  Divider,
   FormControl,
-  FormLabel,
   Highlight,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
   Stack,
-  StackDivider,
   Text,
 } from '@chakra-ui/react';
 import type { NextPage } from 'next';
+import ReCAPTCHA from 'react-google-recaptcha';
 import Head from 'next/head';
 import {
+  IconeEye,
+  IconEmail,
+  IconEyeInvisible,
   IconLogin,
   IconPassword,
   IconRegister,
-  IconUser,
 } from '../assets/icons';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 const Home: NextPage = () => {
+  const router = useRouter();
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  //
+  const resetState = () => {
+    setShowConfirmPassword(false);
+    setShowPassword(false);
+    setShowPassword(false);
+    setEmail('');
+    setPassword('');
+    setPasswordConfirm('');
+  };
+
   return (
     <>
       <Head>
@@ -31,8 +51,8 @@ const Home: NextPage = () => {
         w={360}
         bg="#232A3B"
         color="white"
-        h="100%"
-        pt={5}
+        h="max-content"
+        py={8}
         shadow={'dark-lg'}
         mx="auto"
         textAlign={'center'}
@@ -45,7 +65,7 @@ const Home: NextPage = () => {
           pb={4}
         >
           <Highlight
-            query="تیکتینگ"
+            query={['تیکتینگ']}
             styles={{
               px: '1',
               py: '1',
@@ -60,17 +80,17 @@ const Home: NextPage = () => {
         </Text>
         <Box
           w="90%"
-          h="85%"
+          h="max-content"
           bgColor="brand.800"
           shadow="md"
           mx="auto"
           borderRadius="md"
           mt={8}
-          pt={10}
+          py={10}
           display="flex"
           flexDirection="column"
           alignItems="center"
-          gap={20}
+          gap={isRegistering ? 10 : 20}
         >
           <Stack
             direction="row"
@@ -80,11 +100,17 @@ const Home: NextPage = () => {
             ml={2}
           >
             <Button
-              variant="outline"
+              variant={isRegistering ? 'solid' : 'outline'}
               fontWeight="400"
               colorScheme="telegram"
               size="lg"
               leftIcon={<IconRegister />}
+              _hover={!isRegistering ? { bg: 'brand.900' } : {}}
+              _active={!isRegistering ? { bg: 'brand.900' } : {}}
+              onClick={() => {
+                setIsRegistering(true);
+                resetState();
+              }}
             >
               ثبت نام
             </Button>
@@ -93,46 +119,144 @@ const Home: NextPage = () => {
               colorScheme="telegram"
               size="lg"
               rightIcon={<IconLogin />}
+              _hover={isRegistering ? { bg: 'brand.900' } : {}}
+              _active={isRegistering ? { bg: 'brand.900' } : {}}
+              variant={isRegistering ? 'outline' : 'solid'}
+              onClick={() => {
+                setIsRegistering(false);
+                resetState();
+              }}
             >
               ورود
             </Button>
           </Stack>
-          <FormControl px={2} display="flex" flexDirection="column" gap={6}>
-            <InputGroup>
-              <InputRightElement
-                pr={2}
-                pointerEvents="none"
-                children={<IconUser />}
+          <Box px={2} display="flex" flexDirection="column" gap={6}>
+            <FormControl>
+              <InputGroup>
+                <InputRightElement
+                  pr={2}
+                  top="4px"
+                  pointerEvents="none"
+                  children={<IconEmail />}
+                />
+                <Input
+                  type="email"
+                  placeholder="ایمیل"
+                  _placeholder={{ color: '#848484' }}
+                  borderColor="brand.900"
+                  bgColor="brand.900"
+                  color="#848484"
+                  pr={10}
+                  size="lg"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
+              </InputGroup>
+            </FormControl>
+            <FormControl>
+              <InputGroup
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <InputRightElement
+                  pr={2}
+                  top="4px"
+                  pointerEvents="none"
+                  children={<IconPassword />}
+                />
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="رمز عبور"
+                  _placeholder={{ color: '#848484' }}
+                  borderColor="brand.900"
+                  bgColor="brand.900"
+                  color="#848484"
+                  pr={10}
+                  size="lg"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
+                <InputLeftElement
+                  top="4px"
+                  cursor="pointer"
+                  onClick={() =>
+                    showPassword
+                      ? setShowPassword(false)
+                      : setShowPassword(true)
+                  }
+                >
+                  {password.length === 0 ? (
+                    ''
+                  ) : showPassword ? (
+                    <IconeEye />
+                  ) : (
+                    <IconEyeInvisible />
+                  )}
+                </InputLeftElement>
+              </InputGroup>
+            </FormControl>
+            {isRegistering && (
+              <FormControl>
+                <InputGroup
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <InputRightElement
+                    pr={2}
+                    top="4px"
+                    pointerEvents="none"
+                    children={<IconPassword />}
+                  />
+                  <Input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    placeholder="تکرار رمز عبور"
+                    _placeholder={{ color: '#848484' }}
+                    borderColor="brand.900"
+                    bgColor="brand.900"
+                    color="#848484"
+                    pr={10}
+                    size="lg"
+                    value={passwordConfirm}
+                    onChange={e => setPasswordConfirm(e.target.value)}
+                  />
+                  <InputLeftElement
+                    top="4px"
+                    cursor="pointer"
+                    onClick={() =>
+                      showConfirmPassword
+                        ? setShowConfirmPassword(false)
+                        : setShowConfirmPassword(true)
+                    }
+                  >
+                    {passwordConfirm.length === 0 ? (
+                      ''
+                    ) : showConfirmPassword ? (
+                      <IconeEye />
+                    ) : (
+                      <IconEyeInvisible />
+                    )}
+                  </InputLeftElement>
+                </InputGroup>
+              </FormControl>
+            )}
+            <Box mt={4}>
+              <ReCAPTCHA
+                size="normal"
+                sitekey="6Ld-MfggAAAAAIMbe-YePd6XQeqW48sTXlcuZJOm"
+                hl="fa"
               />
-              <Input
-                type="email"
-                placeholder="ایمیل"
-                _placeholder={{ color: '#848484' }}
-                borderColor="brand.900"
-                bgColor="brand.900"
-                color="#848484"
-                pr={10}
-                size="lg"
-              />
-            </InputGroup>
-            <InputGroup>
-              <InputRightElement
-                pr={2}
-                pointerEvents="none"
-                children={<IconPassword />}
-              />
-              <Input
-                type="email"
-                placeholder="رمز عبور"
-                _placeholder={{ color: '#848484' }}
-                borderColor="brand.900"
-                bgColor="brand.900"
-                color="#848484"
-                pr={10}
-                size="lg"
-              />
-            </InputGroup>
-          </FormControl>
+            </Box>
+            <Button
+              size="lg"
+              mt={8}
+              colorScheme="telegram"
+              onClick={() => router.push('./Ticketing')}
+            >
+              {isRegistering ? 'ثبت‌نام' : 'ورود'}
+            </Button>
+          </Box>
         </Box>
       </Box>
     </>
