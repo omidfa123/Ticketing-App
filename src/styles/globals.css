@@ -28,3 +28,20 @@ body {
   background-color: #d1d5db;
   padding: 1rem 0 1rem 0;
 }
+
+::-webkit-scrollbar {
+  width: 20px;
+  height: 8px;
+}
+::-webkit-scrollbar-button {
+  background-color: #232a3b;
+  display: none;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #232a3b;
+}
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #313a56;
+  border-radius: 3px;
+}

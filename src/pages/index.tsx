@@ -252,7 +252,9 @@ const Home: NextPage = () => {
               size="lg"
               mt={8}
               colorScheme="telegram"
-              onClick={() => router.push('./Ticketing')}
+              onClick={() => {
+                router.push('/Ticketing');
+              }}
             >
               {isRegistering ? 'ثبت‌نام' : 'ورود'}
             </Button>

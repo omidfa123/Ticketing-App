@@ -23,7 +23,7 @@ import {
   IconRightArrow,
   IconRightArrowDouble,
 } from '../../assets/icons';
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+
 const Ticketing: NextPage = () => {
   return (
     <>
@@ -32,35 +32,34 @@ const Ticketing: NextPage = () => {
       </Head>
       <Box
         w={360}
-        h="96vh"
+        h="99vh"
         bg="#232A3B"
         color="white"
         shadow={'dark-lg'}
         mx="auto"
         pos={'relative'}
-        pb={2}
         overflow={'hidden'}
       >
-        <Box pr={6} display={'flex'} alignItems="center" gap={2} py={4}>
+        <Box pr={6} display={'flex'} alignItems="center" gap={2} py={2}>
           <IconMenu />
           <Text>پشتیبانی</Text>
         </Box>
         <Divider />
         <Box
           w="90%"
-          h="90%"
+          h="94%"
           bgColor="#293145"
           shadow="md"
           mx="auto"
           borderRadius="md"
-          my={4}
+          my={3}
           display={'flex'}
           flexDirection={'column'}
           p={3}
         >
           <Box
             pos={'relative'}
-            pb={4}
+            pb={2}
             display="flex"
             justifyContent="space-between"
           >
@@ -85,103 +84,100 @@ const Ticketing: NextPage = () => {
           <Box py={4} fontSize="sm">
             <Text>لیست درخواست های ایجاد شده</Text>
           </Box>
-          <Box width="787px" pt={2} pos={'absolute'} top="20%">
-            <Flex
-              fontSize="sm"
-              justify="space-between"
-              borderBottom="1px"
-              borderBottomColor="gray.500"
-              px={4}
-              pb={2}
-              mb={4}
-            >
-              <Text>موضوع</Text>
-              <Text pr={6}>واحد پشتیبانی</Text>
-              <Text>وضعیت</Text>
-              <Text>مشاهده</Text>
-            </Flex>
+          <Box overflow={'scroll'} overflowY="hidden">
+            <Box width="787px" pt={2} top="20%">
+              <Flex
+                fontSize="sm"
+                justify="space-between"
+                borderBottom="1px"
+                borderBottomColor="gray.500"
+                px={4}
+                pb={2}
+                mb={4}
+              >
+                <Text>موضوع</Text>
+                <Text pr={6}>واحد پشتیبانی</Text>
+                <Text>وضعیت</Text>
+                <Text>مشاهده</Text>
+              </Flex>
 
-            <Flex
-              px={4}
-              mb={4}
-              mx={1}
-              alignItems="center"
-              justifyContent="space-between"
-              bgColor="brand.800"
-              h="40px"
-              borderRadius="8px"
-              pos={'relative'}
-            >
-              <Link href="#" color="#EBBA07" fontSize="sm">
-                پیگیری سفارش
-              </Link>
-              <Text fontSize="sm" pl={4}>
-                سفارشات
-              </Text>
-              <Badge
-                bg="#122640"
-                color="white"
-                fontSize="small"
-                fontWeight={'normal'}
-                borderRadius="full"
+              <Flex
+                px={4}
+                mb={4}
+                mx={1}
+                alignItems="center"
+                justifyContent="space-between"
+                bgColor="brand.800"
+                h="40px"
+                borderRadius="8px"
+                pos={'relative'}
               >
-                بسته شده
-              </Badge>
-              <Link href="#" color="#EBBA07" fontSize="sm">
-                مشاهده
-              </Link>
-              <Divider
-                orientation="vertical"
-                color={'gray.500'}
-                h={'70%'}
-                pos="absolute"
-                left={'10%'}
-              />
-            </Flex>
-            <Flex
-              px={4}
-              mb={4}
-              mx={1}
-              alignItems="center"
-              justifyContent="space-between"
-              bgColor="brand.800"
-              h="40px"
-              borderRadius="8px"
-              pos={'relative'}
-            >
-              <Link href="#" color="#EBBA07" fontSize="sm">
-                پیگیری سفارش
-              </Link>
-              <Text fontSize="sm" pl={4}>
-                سفارشات
-              </Text>
-              <Badge
-                bg="#122640"
-                color="white"
-                fontSize="small"
-                fontWeight={'normal'}
-                borderRadius="full"
+                <Link href="#" color="#EBBA07" fontSize="sm">
+                  پیگیری سفارش
+                </Link>
+                <Text fontSize="sm" pl={4}>
+                  سفارشات
+                </Text>
+                <Badge
+                  bg="#122640"
+                  color="white"
+                  fontSize="small"
+                  fontWeight={'normal'}
+                  borderRadius="full"
+                >
+                  بسته شده
+                </Badge>
+                <Link href="#" color="#EBBA07" fontSize="sm">
+                  مشاهده
+                </Link>
+                <Divider
+                  orientation="vertical"
+                  color={'gray.500'}
+                  h={'70%'}
+                  pos="absolute"
+                  left={'10%'}
+                />
+              </Flex>
+              <Flex
+                px={4}
+                mb={4}
+                mx={1}
+                alignItems="center"
+                justifyContent="space-between"
+                bgColor="brand.800"
+                h="40px"
+                borderRadius="8px"
+                pos={'relative'}
               >
-                بسته شده
-              </Badge>
-              <Link href="#" color="#EBBA07" fontSize="sm">
-                مشاهده
-              </Link>
-              <Divider
-                orientation="vertical"
-                color={'gray.500'}
-                h={'70%'}
-                pos="absolute"
-                left={'10%'}
-              />
-            </Flex>
+                <Link href="#" color="#EBBA07" fontSize="sm">
+                  پیگیری سفارش
+                </Link>
+                <Text fontSize="sm" pl={4}>
+                  سفارشات
+                </Text>
+                <Badge
+                  bg="#122640"
+                  color="white"
+                  fontSize="small"
+                  fontWeight={'normal'}
+                  borderRadius="full"
+                >
+                  بسته شده
+                </Badge>
+                <Link href="#" color="#EBBA07" fontSize="sm">
+                  مشاهده
+                </Link>
+                <Divider
+                  orientation="vertical"
+                  color={'gray.500'}
+                  h={'70%'}
+                  pos="absolute"
+                  left={'10%'}
+                />
+              </Flex>
+            </Box>
           </Box>
-          <Flex
-            alignItems="center"
-            justifyContent="center"
-            pt={32}
-            flexGrow="1"
-          >
+          <Flex alignItems="center" justifyContent="center" py={4}>
             <IconRightArrowDouble />
             <IconRightArrow />
             <Text mx={6} mr={7}>
